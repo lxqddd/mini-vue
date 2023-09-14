@@ -1,16 +1,17 @@
-import { track, trigger } from './effect'
+import { mutableHandler, readonlyHandler } from './baseHandlers'
 
-export function reactive<T extends object>(raw: T) {
-  return new Proxy(raw, {
-    get(target, key) {
-      const res = Reflect.get(target, key)
-      track(target, key)
-      return res
-    },
-    set(target, key, value) {
-      Reflect.set(target, key, value)
-      trigger(target, key)
-      return true
-    }
-  })
+function crateActiveObject<T extends object>(raw: T, baseHandler: ProxyHandler<object>) {
+  return new Proxy(raw, baseHandler) as T
+}
+
+export function reactive<T extends object>(raw: T): T {
+  return crateActiveObject(raw, mutableHandler)
+}
+
+export function readonly<T extends object>(raw: T): T {
+  return crateActiveObject(raw, readonlyHandler)
+}
+
+export function isReactive<T extends object>(raw: T): boolean {
+  return true
 }

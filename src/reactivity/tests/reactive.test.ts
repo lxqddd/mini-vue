@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { reactive } from '../reactive'
+import { isReactive, reactive } from '../reactive'
 
 describe('reactive', () => {
   it('happy path', () => {
@@ -14,5 +14,8 @@ describe('reactive', () => {
 
     expect(observed.age).toBe(19)
     expect(original.age).toEqual(19)
+
+    expect(isReactive(original)).toBe(false)
+    expect(isReactive(observed)).toBe(true)
   })
 })
