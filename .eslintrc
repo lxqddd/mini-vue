@@ -1,0 +1,10 @@
+{
+  "extends": "@antfu",
+  "rules": {
+    "@typescript-eslint/comma-dangle": ["error", "never"],
+    "curly": "off",
+    "@typescript-eslint/no-this-alias": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/brace-style": "off"
+  }
+}
