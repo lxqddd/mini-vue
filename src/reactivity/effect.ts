@@ -7,6 +7,7 @@ interface IRunner {
 
 const targetMap = new Map<any, Map<any, Set<ReactiveEffect>>>()
 let activeEffect: ReactiveEffect
+let shouldTrack: boolean
 
 function cleanupDeps(activeEffect: ReactiveEffect) {
   activeEffect.deps.forEach((dep) => {
@@ -24,6 +25,7 @@ class ReactiveEffect {
 
   run() {
     activeEffect = this
+
     return this._fn()
   }
 

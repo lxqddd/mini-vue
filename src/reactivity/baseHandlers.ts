@@ -3,6 +3,10 @@ import { track, trigger } from './effect'
 type TGetterRet<T> = (target: object, key: string) => string extends keyof T ? T[keyof T & string] : any
 type TSetterRet<T> = (target: T, key: string, value: any) => boolean
 
+export enum ReactiveFlags {
+  IS_REACTIVE = '_v_is_reactive'
+}
+
 export function createGetter<T extends object>(isReadonly: boolean): TGetterRet<T> {
   return function (target: T, key: string) {
     const res = Reflect.get(target, key)

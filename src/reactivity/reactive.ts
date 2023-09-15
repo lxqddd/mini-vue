@@ -11,7 +11,3 @@ export function reactive<T extends object>(raw: T): T {
 export function readonly<T extends object>(raw: T): T {
   return crateActiveObject(raw, readonlyHandler)
 }
-
-export function isReactive<T extends object>(raw: T): boolean {
-  return true
-}
