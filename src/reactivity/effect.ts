@@ -80,3 +80,11 @@ export function effect<T extends Function>(fn: T, options: { scheduler?: Functio
 export function stop(runner: IRunner) {
   runner.effect?.stop()
 }
+
+/**
+ * getter -> track -> 将副作用函数收集到一个Set中
+ * setter -> trigger -> 遍历Set，挨个执行遍历到的副作用函数
+ *
+ * 什么是副作用函数：
+ * 在执行的时候，会对函数外部的变量产生影响
+ */
